@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+    bootstrap="tests/TestBootstrap.php"
+    cacheResult="false"
+    colors= "true"
+    executionOrder="random"
+    failOnWarning="true"
+    failOnRisky="true"
+    failOnEmptyTestSuite="true"
+    beStrictAboutOutputDuringTests="true"
+    verbose= "true"
+>
+    <php>
+        <!-- PHP Configurations -->
+        <ini name="display_errors" value="On"/>
+        <ini name="error_reporting" value="-1"/>
+
+        <!-- ENV Variables -->
+        <env name="APP_ENV" value="test"/>
+        <env name="APP_DEBUG" value="1"/>
+        <env name="APP_SECRET" value="s$cretf0rt3st"/>
+        <env name="SHELL_VERBOSITY" value="-1"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
+
+        <!-- Server Variables -->
+        <server name="KERNEL_CLASS" value="Shopware\Core\Kernel"/>
+        <server name="MAILER_URL" value="null://localhost"/>
+    </php>
+    <testsuites>
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+    </testsuites>
+    <coverage>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+        <exclude>
+            <directory suffix=".php">src/Communication/Command/</directory>
+            <directory>./tests</directory>
+        </exclude>
+    </coverage>
+</phpunit>

@@ -1,0 +1,55 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <!-- Facades -->
+        <service id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Facade" public="true">
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\CustomerPriceService" type="service"/>
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\ExternalPriceReader" type="service"/>
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\InputValidation" type="service"/>
+        </service>
+
+        <!-- Services -->
+        <service id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\CustomerReader" public="true">
+            <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service" />
+            <argument id="GSCustomerSpecificPrice\Persistence\Repository\CustomerRepository" type="service"/>
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Logger" type="service"/>
+        </service>
+
+        <service id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\CustomerPriceService" public="true">
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\CustomerReader" type="service"/>
+            <argument id="gs_customer_price.repository" type="service" />
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\ProductService" type="service"/>
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Logger" type="service"/>
+            <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service" />
+        </service>
+
+        <service id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\InputValidation" public="true">
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\CustomerReader" type="service"/>
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\ProductService" type="service"/>
+        </service>
+
+        <service id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\ExternalPriceReader" public="true">
+            <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service" />
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Logger" type="service"/>
+            <argument id="GSCustomerSpecificPrice\Persistence\Repository\ProductRepository" type="service"/>
+        </service>
+
+        <service id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\MessageSender" public="true">
+            <argument type="service" id="messenger.bus.shopware"/>
+        </service>
+
+        <service id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\MessageHandler">
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\CustomerPriceService" type="service"/>
+            <tag name="messenger.message_handler"/>
+        </service>
+
+        <service id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\ProductService" public="true">
+            <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service" />
+            <argument id="GSCustomerSpecificPrice\Persistence\Repository\ProductRepository" type="service"/>
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Logger" type="service"/>
+        </service>
+
+    </services>
+</container>

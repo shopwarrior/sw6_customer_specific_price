@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Price decrease for order</title>
+        <input-field type="int">
+            <name>threshold</name>
+            <label>Minimum threshold</label>
+            <helpText>Price will be decreased 1% after each order till this amount.</helpText>
+            <defaultValue>100</defaultValue>
+        </input-field>
+    </card>
+    <card>
+        <title>Debug</title>
+        <title lang="de-DE">Debug</title>
+        <input-field type="bool">
+            <name>logDebug</name>
+            <label>Log debug info</label>
+            <label lang="de-DE">Log debug info</label>
+            <required>true</required>
+        </input-field>
+    </card>
+</config>

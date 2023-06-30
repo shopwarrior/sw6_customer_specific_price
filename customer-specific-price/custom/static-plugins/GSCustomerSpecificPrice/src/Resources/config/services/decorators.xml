@@ -1,0 +1,11 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\CustomerPriceCalculator"
+                 decorates="Shopware\Core\Content\Product\SalesChannel\Price\ProductPriceCalculator">
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\CustomerPriceCalculator.inner" type="service" />
+            <argument id="GSCustomerSpecificPrice\Business\ImportCustomerPrice\Service\CustomerPriceService" type="service" />
+        </service>
+    </services>
+</container>
